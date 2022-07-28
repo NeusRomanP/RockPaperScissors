@@ -1,0 +1,250 @@
+body{
+    min-height: 100vh;
+    margin: 0;
+    background-color: #333;
+    color: white;
+    display: flex;
+}
+
+.hidden{
+    display: none;
+}
+
+.game{
+    width: 100%;
+    margin: auto;
+}
+
+.wrapper{
+    display: grid;
+    max-width: 600px;
+    width: 90%;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: auto;
+    gap: 20px;
+}
+
+.element{
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.element:hover{
+    background-color: white;
+    box-shadow: 0 0 5px white;
+}
+
+.results{
+    text-align: center;
+}
+
+@media (max-width:500px){
+    .wrapper{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .element{
+        width: 150px;
+    }
+}
+
+
+/*Animations*/
+
+.animations{
+    position: absolute;
+    max-width: 1000px;
+    width: 100%;
+    height: 100vh;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    z-index: -1;
+}
+
+/*Scissors*/
+
+.scissors{
+    position: absolute;
+    top: 50%;
+    left: -200px;
+    transform: translateY(-50%);
+    opacity: 0;
+    animation: scissor-translate 4s linear forwards;
+}
+
+@keyframes scissor-translate{
+    0% {
+        opacity: 0;
+        left: -200px;
+    }
+    10% {
+        opacity: 1;
+        left: 0;
+    }
+    90%{
+        opacity: 1;
+        left: 1000px;
+    }
+    100% {
+        opacity: 0;
+        left: 1000px;
+    }
+}
+
+.scissors .scissors__draw1{
+    background-color: #AAA;
+    width: 200px;
+    height: 20px;
+    transform: rotate(30deg);
+    position: relative;
+    animation:scissor-move1 2s linear infinite;
+}
+
+.scissors .scissors__draw1::before{
+    content: '';
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: -60px;
+    background-color: transparent;
+    border: 10px solid red;
+    border-bottom: 20px solid red;
+}
+
+.scissors .scissors__draw2{
+    background-color: #AAA;
+    width: 200px;
+    height: 20px;
+    transform: rotate(-30deg);
+    position: relative;
+    margin-top: -20px;
+    animation:scissor-move2 2s linear infinite;
+}
+
+.scissors .scissors__draw2::before{
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: 10px solid red;
+    border-top: 20px solid red;
+}
+
+@keyframes scissor-move1{
+    0%{
+        transform: rotate(30deg);
+    }
+    50%{
+        transform: rotate(5deg);
+    }
+    100%{
+        transform: rotate(30deg);
+    }
+}
+
+@keyframes scissor-move2{
+    0%{
+        transform: rotate(-30deg);
+    }
+    50%{
+        transform: rotate(-5deg);
+    }
+    100%{
+        transform: rotate(-30deg);
+    }
+}
+
+/*Paper*/
+.paper{
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    animation: paper-translate 4s linear forwards;
+}
+
+@keyframes paper-translate{
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+    20% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    80% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+}
+
+.paper .paper__draw{
+    height: 200px;
+    width: 150px;
+    border: 2px solid black;
+    background-color: white;
+    padding: 10px;
+}
+
+/*Rock*/
+.rock{
+    position: absolute;
+    display: block;
+    top: -200px;
+    left: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    animation: rock-animation 4s linear forwards;
+}
+
+.rock .rock__draw{
+    height: 100px;
+    width: 200px;
+    border: 2px solid black;
+    background-color: #AAA;
+    opacity: 1;
+    border-radius: 175px 100px 20px 20px/ 100px 100px 30px 35px;
+}
+
+@keyframes rock-animation{
+    0%{
+        top: -200px;
+        opacity: 1;
+    }
+    12%{
+        top: 60%;
+        opacity: 1;
+    }
+    14%{
+        top: 57%;
+        opacity: 1;
+    }
+    16%{
+        top: 60%;
+        opacity: 1;
+    }
+    75%{
+        top: 60%;
+        opacity: 1;
+    }
+    100%{
+        top: 60%;
+        opacity: 0;
+    }
+
+}
